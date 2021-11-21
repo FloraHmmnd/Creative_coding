@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grid rectangle sketch</title>
+  </head>
+  <body>
+    <div id="canvas_container">
+      <canvas height="600" width="600"></canvas>
+    </div>
+    <style>
+      #canvas_container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+    <script>
+      let canvas = document.querySelector('canvas')
+      let context = canvas.getContext('2d')
+
+      function drawGridOfRect (width, height, gap) {
+        for (let i = 0; i < 5; i++) {
+          for (let j = 0; j < 5; j++) {
+            let x = 100 + (width + gap) * i
+            let y = 100 + (height + gap) * j
+
+            context.beginPath()
+            context.strokeRect(x, y, width, height)
+
+            if (Math.random() > 0.5) {
+              context.beginPath()
+              context.strokeRect(x + 8, y + 8, width - 16, height - 16)
+            }
+            if (Math.random() > 0.3) {
+              context.beginPath()
+              context.fillRect(x + 16, y + 16, width - 32, height - 32)
+            }
+
+            if (Math.random() > 0.8) {
+              context.beginPath()
+              context.arc(x + 30, y + 30, width - 56, 0, 2 * Math.PI)
+              context.stroke()
+            }
+            if (Math.random() > 0.9) {
+              context.clearRect(0, 0, canvas.width, canvas.height)
+            }
+          }
+        }
+      }
+
+      setInterval(drawGridOfRect, 2000, 60, 60, 20)
+    </script>
+  </body>
+</html>
